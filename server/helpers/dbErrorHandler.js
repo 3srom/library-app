@@ -18,11 +18,11 @@ const getErrorMessage = (err) => {
   return message
 }
 
+// newer mongo puts the field in err.keyValue, the old substring trick gave garbage
 const getUniqueErrorMessage = (err) => {
   let output
   try {
-    let fieldName = err.message.substring(err.message.lastIndexOf('.$') + 2,
-      err.message.lastIndexOf('_1'))
+    let fieldName = Object.keys(err.keyValue)[0]
     output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' already exists'
   } catch (ex) {
     output = 'Unique field already exists'
