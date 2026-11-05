@@ -7,6 +7,7 @@ import helmet from 'helmet'
 import userRoutes from './routes/user.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import bookRoutes from './routes/book.routes.js'
+import loanRoutes from './routes/loan.routes.js'
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(cors())
 app.use('/', userRoutes)
 app.use('/', authRoutes)
 app.use('/', bookRoutes)
+app.use('/', loanRoutes)
 
 // express-jwt throws UnauthorizedError when the token is bad
 app.use((err, req, res, next) => {
