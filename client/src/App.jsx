@@ -1,12 +1,13 @@
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import MainRouter from '../MainRouter'
 import './App.css'
 
-function App() {
+const App = () => {
   return (
-    <>
-      <div>
-        <h1>Welcome to Frontend</h1>
-      </div>
-    </>
+    <Router>
+      <MainRouter />
+    </Router>
   )
 }
 
