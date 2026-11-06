@@ -26,7 +26,12 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: 'Password is required'
   },
-  salt: String
+  salt: String,
+  role: {
+    type: String,
+    enum: ['member', 'admin'],
+    default: 'member'
+  }
 })
 
 UserSchema.virtual('password')

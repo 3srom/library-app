@@ -5,13 +5,13 @@ import authCtrl from '../controllers/auth.controller.js'
 const router = express.Router()
 
 router.route('/api/loans')
-  .get(authCtrl.requireSignin, loanCtrl.list)
+  .get(authCtrl.requireSignin, authCtrl.requireAdmin, loanCtrl.list)
   .post(authCtrl.requireSignin, loanCtrl.create)
 
 router.route('/api/loans/:loanId')
   .get(authCtrl.requireSignin, loanCtrl.read)
-  .put(authCtrl.requireSignin, loanCtrl.update)
-  .delete(authCtrl.requireSignin, loanCtrl.remove)
+  .put(authCtrl.requireSignin, authCtrl.requireAdmin, loanCtrl.update)
+  .delete(authCtrl.requireSignin, authCtrl.requireAdmin, loanCtrl.remove)
 
 router.route('/api/loans/:loanId/return')
   .put(authCtrl.requireSignin, loanCtrl.returnBook)

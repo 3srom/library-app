@@ -6,13 +6,13 @@ const router = express.Router()
 
 router.route('/api/books')
   .get(bookCtrl.list)
-  .post(authCtrl.requireSignin, bookCtrl.create)
-  .delete(authCtrl.requireSignin, bookCtrl.removeAll)
+  .post(authCtrl.requireSignin, authCtrl.requireAdmin, bookCtrl.create)
+  .delete(authCtrl.requireSignin, authCtrl.requireAdmin, bookCtrl.removeAll)
 
 router.route('/api/books/:bookId')
   .get(bookCtrl.read)
-  .put(authCtrl.requireSignin, bookCtrl.update)
-  .delete(authCtrl.requireSignin, bookCtrl.remove)
+  .put(authCtrl.requireSignin, authCtrl.requireAdmin, bookCtrl.update)
+  .delete(authCtrl.requireSignin, authCtrl.requireAdmin, bookCtrl.remove)
 
 router.param('bookId', bookCtrl.bookByID)
 

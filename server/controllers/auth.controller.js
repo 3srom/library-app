@@ -18,7 +18,8 @@ const signin = async (req, res) => {
       user: {
         _id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role
       }
     })
   } catch (err) {
@@ -52,4 +53,21 @@ const hasAuthorization = (req, res, next) => {
   next()
 }
 
-export default { signin, signout, requireSignin, hasAuthorization }
+// only admins can change books
+const requireAdmin = async (req, res, next) => {
+  try {
+    let user = await User.findById(req.auth._id)
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({
+        error: 'Admin only'
+      })
+    }
+    next()
+  } catch (err) {
+    return res.status(403).json({
+      error: 'Admin only'
+    })
+  }
+}
+
+export default { signin, signout, requireSignin, hasAuthorization, requireAdmin }
