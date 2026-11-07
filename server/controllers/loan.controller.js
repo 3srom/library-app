@@ -86,7 +86,7 @@ const returnBook = async (req, res) => {
     await loan.save()
     let book = await Book.findById(loan.book)
     book.available = book.available + 1
-    book.save()
+    await book.save()
     res.json(loan)
   } catch (err) {
     return res.status(400).json({
